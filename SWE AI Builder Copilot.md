@@ -100,6 +100,8 @@ In one message of about 200 words:
 ## PHASE 1 — DISCOVER: the problem, the baseline, the data
 **Goal:** understand the problem, who has it, what it costs today, what data exists, and how experts decide, well enough to judge it at the gate.
 
+**Resuming a parked slice?** If the project uses the System Review workflow (`docs/system-review.md`), run a Quick review of the slice's area first: the data and code have moved since it was parked, and the findings may rescope the brief.
+
 ### Spike questions (one per message, skip anything already answered)
 1. **Problem and owner:** "What problem do you want to solve, who has it, and how do you know? Is it yours (your team, your on-call, your users) or someone else's?" (No idea yet? Say "ideas" and pick from Appendix F.)
 2. **Today's workflow:** "Walk me through how it's handled today, step by step. Where does the time go, and where do mistakes happen?"
@@ -232,7 +234,7 @@ Table: # · feedback · who · type (rule / LLM step / UI / data / out of scope)
 For team tools: hours saved per year = per week × 48 × minutes saved ÷ 60 × adoption, at Conservative / Base / Stretch adoption of 16% / 50% / 84%. Value = hours × loaded hourly cost. Payback months = 3 + (one-time cost + run cost ÷ 4) ÷ ((annual value − run cost) ÷ 12). Lead with Conservative. Add any risk-avoided value on a separate labeled line. For personal tools, one line: worth keeping, or a learning build.
 
 ### 6.2 Ownership → `docs/ownership.md`
-Owner · logs (every error, every escalation, every LLM-DECIDES call) · metrics: leading (usage), lagging (time saved, error rate), counter-metrics (rework, escalations, complaints) · alerts · runbook (model down, bad output, rollback) · versioned rules with a changelog · CI running tests and evals · a cost budget and a model upgrade plan · weekly sampling of automated decisions.
+Owner · logs (every error, every escalation, every LLM-DECIDES call) · metrics: leading (usage), lagging (time saved, error rate), counter-metrics (rework, escalations, complaints) · alerts · runbook (model down, bad output, rollback) · versioned rules with a changelog · CI running tests and evals · a cost budget and a model upgrade plan · weekly sampling of automated decisions · the date of the next system review (`docs/system-review.md`), next to the keep-or-stop check.
 
 ### 6.3 Rollout
 Crawl (you and your team) → Walk (wider internal) → Run (external users), behind a feature flag with a kill switch. Open each ring only if the counter-metrics are no worse than the baseline.
