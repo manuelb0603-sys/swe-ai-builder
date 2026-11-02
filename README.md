@@ -2,7 +2,7 @@
 
 **Build LLM features that are worth building, behave predictably, and are owned.**
 
-Version 1.0 · October 2026 · Companion to [`SWE AI Builder Copilot.md`](./SWE%20AI%20Builder%20Copilot.md)
+Version 1.0 · October 2026 · Companion to [`SWE AI Builder Copilot.md`](./SWE%20AI%20Builder%20Copilot.md) and [`System Review Copilot.md`](./System%20Review%20Copilot.md)
 
 ---
 
@@ -15,6 +15,7 @@ Version 1.0 · October 2026 · Companion to [`SWE AI Builder Copilot.md`](./SWE%
 - [How to start in each tool](#how-to-start-in-each-tool)
 - [Rules of the road](#rules-of-the-road)
 - [What this teaches at each level](#what-this-teaches-at-each-level)
+- [System Review](#system-review)
 - [Files](#files)
 
 ---
@@ -206,9 +207,43 @@ Read docs/swe-ai-builder.md and act as the SWE AI Builder. Start Phase 0 in Spik
 
 ---
 
+## System Review
+
+**A companion workflow for an app you already have.** The builder takes one idea from "should I build this?" to
+"shipped and owned." The System Review looks across everything already built and decides what comes next: new
+slices, rescoped parked slices, one-off fixes, data corrections, or nothing. It's a separate skill
+([`System Review Copilot.md`](./System%20Review%20Copilot.md)), run before a builder Phase 1, never inside a
+builder's Verify (Verify checks one slice's diff; a review checks the whole system).
+
+> **Look before deciding, evidence before opinion, one decision at a time, and the owner decides.**
+
+| # | Phase | You do | Agent writes |
+|---|---|---|---|
+| R0 | **Scope** | Pick an area and a mode (Quick or Full) | Capabilities check, repo scan |
+| R1 | **Inventory** | Add anything it should look at | Schema, data profile, code paths, all MEASURED (read-only) |
+| R2 | **Findings** | Approve the ranked list | Findings with evidence (query result or `file:line`) and options |
+| R3 | **Decisions** | Answer one question per finding, picking from suggested answers | Your decision per finding |
+| R4 | **Triage** | Confirm data fixes | Change-list entries, builder Phase 1 briefs, decision log |
+
+**Each finding gets one decision:** one-off (a single prompt, about a day) · slice (schema change, new LLM step, new
+view, or several steps; goes to builder Phase 1) · fold into an existing slice · data fix (confirmed row by row) ·
+park · drop.
+
+**When to run it:** after every 2 released slices or at each keep-or-stop date (builder Phase 6 schedules it), before
+resuming a parked slice (Quick mode on its area), and whenever something surprises you in daily use.
+
+**Start line:**
+```text
+Read docs/system-review.md and act as the System Reviewer. Start R0 in Quick mode.
+```
+In Claude Code, save it as `.claude/skills/system-review/SKILL.md` and run `/system-review`.
+
+---
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| [`SWE AI Builder Copilot.md`](./SWE%20AI%20Builder%20Copilot.md) | The agent's full instructions |
+| [`SWE AI Builder Copilot.md`](./SWE%20AI%20Builder%20Copilot.md) | The builder agent's full instructions |
+| [`System Review Copilot.md`](./System%20Review%20Copilot.md) | The System Review agent's full instructions (separate skill) |
 | `README.md` | This guide |
