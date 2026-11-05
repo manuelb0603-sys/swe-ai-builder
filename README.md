@@ -68,6 +68,7 @@ It adapts a business-focused workshop exercise into an engineering workflow:
 | 4 | **Build** | Review diffs, run it | Rules module, LLM adapters, UI, `README.md` |
 | 5 | **Verify** | Put it in front of a real user | Self-review, feedback log, new tests |
 | 6 | **Ship & Own** | Decide rollout, pitch it | `docs/ownership.md`, `docs/pitch.md` |
+| — | **After release** | Ask for follow-ups from real use | A short plan, tests first, then a preview and a PR |
 
 ### Modes
 
@@ -181,6 +182,11 @@ Read docs/swe-ai-builder.md and act as the SWE AI Builder. Start Phase 0 in Spik
 - **No secrets** in prompts, code, or logs. Model IDs and keys come from config or environment variables.
 - **You review every diff.** The agent doesn't commit, push, or deploy without asking, and it reports only tests it actually ran.
 - **Label every number:** `MEASURED`, `ESTIMATED`, or `ASSUMED`.
+- **Personal details stay private:** preferences, home, family and pay targets go in a gitignored folder, never in commits, PR text, or branch names.
+- **Check it your way:** run the commands yourself, or say you check only in the app; then the agent runs every test and eval and gives you a preview at each gate.
+- **The agent reads real outputs first:** before Verify, it runs each LLM step on about 10 real inputs and brings you only the calls that are yours.
+- **Questions get answers, not edits,** and each decision you make is noted next to the code it shaped ("(user, date)").
+- **Solo tools ship through `dev`:** feature branch → PR into `dev` → the end-to-end check (each feature adds a step) → a release PR to `main` that you merge. Every PR says what reviewers will find.
 - **"No" at the Decide gate is a win:** it saves building the wrong thing.
 
 ---
